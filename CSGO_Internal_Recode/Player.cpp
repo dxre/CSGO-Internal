@@ -13,15 +13,15 @@ bool CPlayer::IsValid()
 	if(this->GetLifeState() != LIFE_ALIVE)
 		return false;
 
-	if(this->IsDormant())
-		return false;
-
 	return true;
 }
 
 bool CPlayer::IsValid(CPlayer* pPlayer)
 {
 	if(!this->IsValid())
+		return false;
+		
+	if(this->IsDormant())
 		return false;
 
 	if(this->GetIndex() == pPlayer->GetIndex())
