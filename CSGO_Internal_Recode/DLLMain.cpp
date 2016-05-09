@@ -12,11 +12,13 @@ bool __fastcall Hooked_CreateMove(void* ecx, void* edx, float frametime, CUserCm
 		return false;
 
 	CPlayer* pLocal = Interfaces.EntList->GetClientEntity<CPlayer>(Interfaces.Engine->GetLocalPlayer());
-	if(!pLocal)
+	if(!pLocal->IsValid())
 		return false;
+	//if(!pLocal)
+	//	return false;
 
-	if(pLocal->GetLifeState() != LIFE_ALIVE)
-		return false;
+	//if(pLocal->GetLifeState() != LIFE_ALIVE)
+	//	return false;
 
 	if(Hack.CVars->aimbot_active)
 		Hack.Aimbot->Main(cmd, frametime);
@@ -149,7 +151,7 @@ void __fastcall Hooked_RenderView(void* ecx, void* edx, CViewSetup &setup, CView
 
 	CPlayer* pLocal = Interfaces.EntList->GetClientEntity<CPlayer>(Interfaces.Engine->GetLocalPlayer());
 	
-	if(!pLocal->IsScoped())
+	if(pLocal->IsValid() && !pLocal->IsScoped())
 		setup.fov = 120.0f;
 
 	//setup.origin = pLocal->GetHitboxPosition(1); //lawl
