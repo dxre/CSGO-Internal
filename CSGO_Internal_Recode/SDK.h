@@ -47,15 +47,15 @@ typedef float matrix3x4[3][4];
 typedef unsigned short ModelInstanceHandle_t;
 typedef unsigned long HFont;
 
-typedef void* (*CreateInterfaceFn)(const char* szInterface, int* pReturnCode);
+typedef void* (*CreateInterfaceFn)(const char*, int*);
 
-typedef void (__cdecl* MsgFn)(char const* pMsg, va_list);
+typedef void (__cdecl* MsgFn)(char const*, va_list);
 
 typedef bool (__thiscall* CreateMoveFn)(void*, float, CUserCmd*);
 typedef void (__thiscall* FrameStageNotifyFn)(void*, ClientFrameStage_t);
 typedef void (__thiscall* PaintTraverseFn)(void*, unsigned int, bool, bool);
-typedef void (__thiscall* DrawModelExecuteFn)(void*, IMatRenderContext* matctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4 *pCustomBoneToWorld);
-typedef void (__thiscall* RenderViewFn)(void*, CViewSetup &setup, CViewSetup &hudViewSetup, int nClearFlags, int whatToDraw);
+typedef void (__thiscall* DrawModelExecuteFn)(void*, IMatRenderContext*, const DrawModelState_t&, const ModelRenderInfo_t&, matrix3x4*);
+typedef void (__thiscall* RenderViewFn)(void*, CViewSetup&, CViewSetup&, int, int);
 
 template <typename Fn> __forceinline Fn CallVirtualFunction(void* pClassBase, int nFunctionIndex)
 {
